@@ -1,4 +1,4 @@
-package org.example.App;
+package org.example.App.Repository;
 
 import org.example.App.Service.Effort;
 import org.example.App.Service.Sensor;

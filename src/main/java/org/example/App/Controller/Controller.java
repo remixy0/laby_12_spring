@@ -1,9 +1,9 @@
-package org.example.App;
+package org.example.App.Controller;
 
+import org.example.App.Repository.Repository;
 import org.example.App.Service.Effort;
 import org.example.App.Service.IMU;
 import org.example.App.Service.LiDAR;
-import org.example.App.Service.Sensor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
