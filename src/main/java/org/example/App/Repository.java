@@ -17,6 +17,16 @@ public class Repository {
         return effortsString;
     }
 
+    public String getAnalysis() {
+        String effortsString = "";
+        for (Sensor effort : sensors) {
+            effortsString += effort.toString() + "was moving for: " + effort.timeOfMovement()+ "s   with average speed of: " + effort.averageSpeed() + "m/s    and acceleration of: "+ effort.averageAcceleration() + "m/s^2";
+
+        }
+        return effortsString;
+    }
+
+
     public void addSensor(Sensor effort) {
         sensors.add(effort);
     }

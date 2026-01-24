@@ -10,21 +10,13 @@ import org.springframework.web.bind.annotation.*;
 public class Controller {
     Repository repository = new Repository();
 
-//    @GetMapping("/effort")
-//    public String stronaGlowna() {
-//        return "add-effort";
-//    }
-
     @GetMapping("/efforts")
     public String getEfforts() {
         return repository.getEfforts();
     }
 
     @GetMapping("/analysis")
-    public String analysis() {
-
-        return repository.getEfforts();
-    }
+    public String analysis() {return repository.getAnalysis();}
 
 
     @PostMapping("/effort")
@@ -33,9 +25,7 @@ public class Controller {
             case IMU -> repository.addSensor(new IMU(effort));
             case LIDAR -> repository.addSensor(new LiDAR(effort));
         }
-
         return "added new effort";
     }
-
 
 }
