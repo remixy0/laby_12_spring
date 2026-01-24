@@ -33,22 +33,22 @@ public class IMU implements Sensor{
 
     @Override
     public String toString() {
-        return effort.getAthleteName() + " " + effort.getAthleteSurname() + "  sensor type: "+  effort.getSensorType() + "     data:" + effort.getData();
+        return effort.getAthleteName() + " " + effort.getAthleteSurname() + "  sensor type: "+  effort.getSensorType();
     }
 
 
     private int startIndex(){
         for(int i=0; i<calculateSpeed().size(); i++){
-            if(calculateSpeed().get(i) > 1) return i;
+            if(calculateSpeed().get(i) > 0.5) return i;
         }
-        return -1;
+        return 0;
     }
 
     private int finishIndex(){
         for(int i=startIndex(); i<calculateSpeed().size(); i++){
             if(calculateSpeed().get(i) < 0.1) return i;
         }
-        return -1;
+        return calculateSpeed().size();
     }
 
     private List<Double> calculateSpeed() {
