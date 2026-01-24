@@ -1,6 +1,9 @@
 package org.example.App;
 
-import org.springframework.ui.Model;
+import org.example.App.Service.Effort;
+import org.example.App.Service.IMU;
+import org.example.App.Service.LiDAR;
+import org.example.App.Service.Sensor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,13 +17,23 @@ public class Controller {
 
     @GetMapping("/efforts")
     public String getEfforts() {
-       return repository.getEfforts();
+        return repository.getEfforts();
+    }
+
+    @GetMapping("/analysis")
+    public String analysis() {
+
+        return repository.getEfforts();
     }
 
 
     @PostMapping("/effort")
     public String addNewEffort(@RequestBody Effort effort) {
-        repository.addEffort(effort);
+        switch (effort.getSensorType()){
+            case IMU -> repository.addSensor(new IMU(effort));
+            case LIDAR -> repository.addSensor(new LiDAR(effort));
+        }
+
         return "added new effort";
     }
 

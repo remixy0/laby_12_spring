@@ -1,22 +1,24 @@
 package org.example.App;
 
+import org.example.App.Service.Effort;
+import org.example.App.Service.Sensor;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class Repository {
-    List<Effort> efforts = new ArrayList<>();
+    List<Sensor> sensors = new ArrayList<>();
 
     public String getEfforts() {
         String effortsString = "";
-        for (Effort effort : efforts) {
+        for (Sensor effort : sensors) {
             effortsString += "   " + effort.toString();
         }
         return effortsString;
     }
 
-    public void addEffort(Effort effort) {
-        efforts.add(effort);
+    public void addSensor(Sensor effort) {
+        sensors.add(effort);
     }
 
 }
