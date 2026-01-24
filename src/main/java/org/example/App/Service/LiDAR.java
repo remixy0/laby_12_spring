@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LiDAR implements Sensor{
+    int id;
     Effort effort;
     private List<Double> distances;
     private double period;
 
     public LiDAR(Effort effort) {
+        this.id = effort.id;
         this.effort = effort;
         distances = effort.getData();
         period = 1/effort.getDataRate();
@@ -34,7 +36,7 @@ public class LiDAR implements Sensor{
 
     @Override
     public String toString() {
-        return effort.getAthleteName() + " " + effort.getAthleteSurname() + "  sensor type: "+  effort.getSensorType();
+        return effort.getAthleteName() + " " + effort.getAthleteSurname() + "  sensor type: "+  effort.getSensorType() + "   id:" + getId();
     }
 
     private int startIndex(){
@@ -72,6 +74,16 @@ public class LiDAR implements Sensor{
         return acceleration;
     }
 
+    @Override
+    public int getId(){
+        return id;
+    }
 
+    @Override
+    public void setData(Effort effort) {
+        this.effort = effort;
+        distances = effort.getData();
+        period = 1/ effort.getDataRate();
+    }
 
 }

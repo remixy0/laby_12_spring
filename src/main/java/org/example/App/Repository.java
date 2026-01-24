@@ -20,7 +20,7 @@ public class Repository {
     public String getAnalysis() {
         String effortsString = "";
         for (Sensor effort : sensors) {
-            effortsString += effort.toString() + "was moving for: " + effort.timeOfMovement()+ "s   with average speed of: " + effort.averageSpeed() + "m/s    and acceleration of: "+ effort.averageAcceleration() + "m/s^2";
+            effortsString += effort.toString() + "    was moving for: " + effort.timeOfMovement()+ "s   with average speed of: " + effort.averageSpeed() + "m/s    and acceleration of: "+ effort.averageAcceleration() + "m/s^2       ";
 
         }
         return effortsString;
@@ -29,6 +29,20 @@ public class Repository {
 
     public void addSensor(Sensor effort) {
         sensors.add(effort);
+    }
+
+
+    public boolean updateSensor(int id, Effort newEffort) {
+        for (int i = 0; i < sensors.size(); i++) {
+            Sensor sensor = sensors.get(i);
+
+            if (sensor.getId() == id) {
+                sensor.setData(newEffort);
+                return true;
+            }
+
+        }
+        return false;
     }
 
 }

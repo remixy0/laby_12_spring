@@ -19,6 +19,7 @@ public class Controller {
     public String analysis() {return repository.getAnalysis();}
 
 
+
     @PostMapping("/effort")
     public String addNewEffort(@RequestBody Effort effort) {
         switch (effort.getSensorType()){
@@ -26,6 +27,16 @@ public class Controller {
             case LIDAR -> repository.addSensor(new LiDAR(effort));
         }
         return "added new effort";
+    }
+
+    @PutMapping("/effort/{id}")
+    public String updateEffort(@PathVariable int id, @RequestBody Effort newEffortData) {
+        boolean isUpdated = repository.updateSensor(id, newEffortData);
+        if (isUpdated) {
+            return "Effort with ID " + id + " updated successfully.";
+        } else {
+            return "Effort not found.";
+        }
     }
 
 }
