@@ -34,9 +34,17 @@ public class Controller {
         boolean isUpdated = repository.updateSensor(id, newEffortData);
         if (isUpdated) {
             return "Effort with ID " + id + " updated successfully.";
-        } else {
-            return "Effort not found.";
-        }
+        } else return "Effort not found.";
+
+    }
+
+    @DeleteMapping("/effort/{id}")
+    public String updateEffort(@PathVariable int id) {
+        boolean isDone = repository.deleteSensor(id);
+        if (isDone) {
+            return "Effort with ID " + id + " deleted successfully.";
+        }else return "Effort not found.";
+
     }
 
 }

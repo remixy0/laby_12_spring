@@ -45,4 +45,15 @@ public class Repository {
         return false;
     }
 
+    public boolean deleteSensor(int id) {
+        for (int i = 0; i < sensors.size(); i++) {
+            Sensor sensor = sensors.get(i);
+            if (sensor.getId() == id) {
+                sensors.remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
