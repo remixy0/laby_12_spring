@@ -1,21 +1,20 @@
-package org.example.App.Service;
+package org.example.App.Model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LiDAR implements Sensor{
+public class IMU implements Sensor{
     int id;
     Effort effort;
-    private List<Double> distances;
+    private List<Double> acceleration;
     private double period;
 
-    public LiDAR(Effort effort) {
+    public IMU(Effort effort) {
         this.id = effort.id;
         this.effort = effort;
-        distances = effort.getData();
-        period = 1/effort.getDataRate();
+        acceleration = effort.getData();
+        period = 1/ effort.getDataRate();
     }
-
 
     @Override
     public double averageSpeed() {
@@ -25,8 +24,8 @@ public class LiDAR implements Sensor{
 
     @Override
     public double averageAcceleration() {
-        double sum = calculateAcceleration().stream().mapToDouble(Double::doubleValue).sum();
-        return sum/calculateAcceleration().size();
+        double sum = acceleration.stream().mapToDouble(Double::doubleValue).sum();
+        return sum/acceleration.size();
     }
 
     @Override
@@ -39,9 +38,10 @@ public class LiDAR implements Sensor{
         return effort.getAthleteName() + " " + effort.getAthleteSurname() + "  sensor type: "+  effort.getSensorType() + "   id:" + getId();
     }
 
+
     private int startIndex(){
         for(int i=0; i<calculateSpeed().size(); i++){
-            if(calculateSpeed().get(i) > 1) return i;
+            if(calculateSpeed().get(i) > 0.5) return i;
         }
         return 0;
     }
@@ -53,25 +53,14 @@ public class LiDAR implements Sensor{
         return calculateSpeed().size();
     }
 
-
     private List<Double> calculateSpeed() {
         List<Double> speed = new ArrayList<>();
-        double previousDistance = distances.get(0);
-        for(int i = 1; i < distances.size(); i++){
-            speed.add((distances.get(i) - previousDistance)/period);
-            previousDistance = distances.get(i);
+        double actualSpeed = 0;
+        for(Double d : acceleration){
+            actualSpeed += d * period;
+            speed.add(actualSpeed);
         }
         return speed;
-    }
-
-    private List<Double> calculateAcceleration() {
-        List<Double> acceleration = new ArrayList<>();
-        double previousSpeed = calculateSpeed().get(0);
-        for(int i = 1; i < calculateSpeed().size(); i++){
-            acceleration.add((calculateSpeed().get(i) - previousSpeed)/period);
-            previousSpeed = calculateSpeed().get(i);
-        }
-        return acceleration;
     }
 
     @Override
@@ -82,8 +71,7 @@ public class LiDAR implements Sensor{
     @Override
     public void setData(Effort effort) {
         this.effort = effort;
-        distances = effort.getData();
+        acceleration = effort.getData();
         period = 1/ effort.getDataRate();
     }
-
 }

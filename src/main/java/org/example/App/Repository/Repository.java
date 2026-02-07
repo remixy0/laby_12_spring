@@ -1,7 +1,7 @@
 package org.example.App.Repository;
 
-import org.example.App.Service.Effort;
-import org.example.App.Service.Sensor;
+import org.example.App.Model.Effort;
+import org.example.App.Model.Sensor;
 
 import java.util.ArrayList;
 import java.util.List;

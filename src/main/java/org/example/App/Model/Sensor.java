@@ -1,4 +1,4 @@
-package org.example.App.Service;
+package org.example.App.Model;
 
 public interface Sensor {
     static int idCounter = 0;

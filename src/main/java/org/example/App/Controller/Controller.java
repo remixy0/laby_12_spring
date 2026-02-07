@@ -1,9 +1,9 @@
 package org.example.App.Controller;
 
 import org.example.App.Repository.Repository;
-import org.example.App.Service.Effort;
-import org.example.App.Service.IMU;
-import org.example.App.Service.LiDAR;
+import org.example.App.Model.Effort;
+import org.example.App.Model.IMU;
+import org.example.App.Model.LiDAR;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

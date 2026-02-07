@@ -1,9 +1,8 @@
-package org.example.App.Service;
+package org.example.App.Model;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
